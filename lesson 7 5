@@ -1,0 +1,4 @@
+var Number = 1;
+for(var Numbers = 0; Numbers < 10; Numbers++){
+  console.log(Numbers);
+}
