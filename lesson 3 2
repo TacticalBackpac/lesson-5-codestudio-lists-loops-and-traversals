@@ -1,0 +1,11 @@
+console.log("Trees:");
+var trees = ["oak", "maple", "dogwood"];
+console.log(trees);
+console.log("");
+
+console.log("My Favorite Songs:");
+var myFavoriteSongs = ["ILoveUIHateU", "On That Time", "Magnolia"];
+console.log(myFavoriteSongs);
+console.log("");
+// create a list with three of your favorite songs
+// print the list to the console
