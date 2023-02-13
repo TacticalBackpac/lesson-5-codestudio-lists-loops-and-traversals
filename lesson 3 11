@@ -1,0 +1,39 @@
+var photoList = ["https://images.code.org/33b3dc2551fa95a343615c8b4a996047-image-1649881721432.png", "https://images.code.org/45602755a1d329a915172f8fd02e7a71-image-1669945308291.png", "https://images.code.org/0589842feb31f1d293f498407be180c6-image-1669945446206.png"];
+var index = 0;
+updateScreen();
+
+onEvent("photo_select", "change", function( ) {
+	appendItem(photoList, getImageURL("photo_select"));
+	updateScreen();
+});
+
+
+//Add code to debug these two scroll buttons
+onEvent("rightButton", "click", function( ) {
+  if(index === photoList.length-1){
+    index = 0;
+  }else{
+    index = index + 1;
+  }
+  updateScreen();
+});
+
+onEvent("leftButton", "click", function( ) {
+  if(index === 0){
+    index = photoList.length-1;
+  }else{
+    index = index - 1;
+  }
+  updateScreen();
+});
+
+onEvent("randomButton", "click", function( ) {
+  index = Math.floor(Math.random() * photoList.length);
+  updateScreen();
+});
+
+function updateScreen(){
+  setImageURL("pictureOutput", photoList[index]);
+  setText("totalPhotosOutput", photoList.length);
+  console.log("Current index: " + index + " Image URL: " + photoList[index]);
+}
