@@ -1,0 +1,40 @@
+// Build the Random Forecaster app
+var cities = getColumn("Daily Weather", "City");
+var highs = getColumn("Daily Weather", "High Temperature");
+var lows = getColumn("Daily Weather", "Low Temperature");
+var conditions = getColumn("Daily Weather", "Main Condition");
+var icons = getColumn("Daily Weather", "Icon");
+var forecastNumbers = getColumn("Daily Weather", "Forecast Number");
+
+var filteredCities = [];
+var filteredHighs = [];
+var filteredLows = [];
+var filteredConditions = [];
+var filteredIcons = [];
+var index;
+filter();
+
+onEvent("forecastButton", "click", function( ) {
+  updateScreen();
+});
+
+function filter() {
+  for (var i = 0; i < cities.length; i++) {
+    if (forecastNumbers[i]==1) {
+      appendItem(filteredCities, cities[i]);
+      appendItem(filteredHighs, highs[i]);
+      appendItem(filteredLows, lows[i]);
+      appendItem(filteredConditions, conditions[i]);
+      appendItem(filteredIcons, icons[i]);
+    }
+  }
+}
+
+function updateScreen() {
+  index = randomNumber(0, filteredCities.length - 1);
+  setText("cityOutput", filteredCities[index]);
+  setText("highTempOutput", filteredHighs[index]);
+  setText("lowTempOutput", filteredLows[index]);
+  setText("conditionOutput", filteredConditions[index]);
+  setProperty("iconOutput", "image", filteredIcons[index]);
+}
