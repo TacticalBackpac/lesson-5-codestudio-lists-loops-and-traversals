@@ -1,40 +1,35 @@
 // Build the Random Forecaster app
-var cities = getColumn("Daily Weather", "City");
-var highs = getColumn("Daily Weather", "High Temperature");
-var lows = getColumn("Daily Weather", "Low Temperature");
-var conditions = getColumn("Daily Weather", "Main Condition");
-var icons = getColumn("Daily Weather", "Icon");
-var forecastNumbers = getColumn("Daily Weather", "Forecast Number");
-
-var filteredCities = [];
-var filteredHighs = [];
-var filteredLows = [];
-var filteredConditions = [];
-var filteredIcons = [];
-var index;
+var cityList = getColumn("Daily Weather", "City");
+var conditionList = getColumn("Daily Weather", "Main Condition");
+var highList = getColumn("Daily Weather", "High Temperature");
+var lowList = getColumn("Daily Weather", "Low Temperature");
+var iconList = getColumn("Daily Weather", "Icon");
+var cityNumList = getColumn("Daily Weather", "id");
+var city = [];
+var condition = [];
+var high = [];
+var low = [];
+var icon = [];
 filter();
-
 onEvent("forecastButton", "click", function( ) {
   updateScreen();
 });
-
 function filter() {
-  for (var i = 0; i < cities.length; i++) {
-    if (forecastNumbers[i]==1) {
-      appendItem(filteredCities, cities[i]);
-      appendItem(filteredHighs, highs[i]);
-      appendItem(filteredLows, lows[i]);
-      appendItem(filteredConditions, conditions[i]);
-      appendItem(filteredIcons, icons[i]);
+  for (var i = 0; i < cityList.length; i++) {
+    if (cityNumList[i] == 1) {
+      appendItem(city, cityList[i]);
+      appendItem(condition, conditionList[i]);
+      appendItem(high, highList[i]);
+      appendItem(low, lowList[i]);
+      appendItem(icon, iconList[i]);
     }
   }
 }
-
 function updateScreen() {
-  index = randomNumber(0, filteredCities.length - 1);
-  setText("cityOutput", filteredCities[index]);
-  setText("highTempOutput", filteredHighs[index]);
-  setText("lowTempOutput", filteredLows[index]);
-  setText("conditionOutput", filteredConditions[index]);
-  setProperty("iconOutput", "image", filteredIcons[index]);
+  var index = randomNumber(0, city.length - 1);
+  setText("cityOutput", city [index]);
+  setText("conditionOutput", condition [index]);
+  setText("lowTempOutput", low [index]);
+  setText("highTempOutput", high [index]);
+  setProperty("iconOutput", "image", icon [index]);
 }
